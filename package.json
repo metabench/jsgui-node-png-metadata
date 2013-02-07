@@ -1,0 +1,21 @@
+{
+  "name": "jsgui-node-png-metadata",
+  "description": "Reads metadata from PNG files",
+  "version": "0.3.8",
+  "homepage": "http://github.com/metabench/jsgui-node-png-metadata",
+  "author": {
+    "name": "James Vickers",
+    "email": "james@metabench.com"
+  },
+  "licenses": [
+    {}
+  ],
+  "main": "./jsgui-node-png-metadata.js",
+  "dependencies": {
+    "requirejs": "~2.1.2",
+    "jsgui-lang-essentials-geometry": "~0.3.8",
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}

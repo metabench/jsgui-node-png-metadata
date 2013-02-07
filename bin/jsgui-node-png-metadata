@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+var png_metadata = require('jsgui-node-png-metadata');
+var jsgui = require('jsgui-lang-essentials');
+
+var stringify = jsgui.stringify;
+
+var program = require('commander');
+
+  program
+  .version('0.3.8')
+  //.option('-d, --source_dir [value]', 'Image source directory')
+  //.option('-r, --rel_sprite_path [value]', 'relative sprite path')
+  .option('-p, --image_path [value]', 'Input PNG path')
+  .parse(process.argv);
+
+
+//console.log(program.source_dir);
+//console.log(program.rel_sprite_path);
+console.log(program.image_path);
+//console.log(program.css_path);
+
+/*
+
+var sheet = new Spritesheet({
+    source_dir: program.source_dir || '.',
+    rel_sprite_path: program.rel_sprite_path || '.',
+    sprite_path: program.sprite_path || 'sprite.png',
+    css_path: program.css_path || 'sprite.css'
+});
+
+sheet.spritesheet();
+
+*/
+
+
+png_metadata.from_file(image_path, function(err, res_metadata) {
+    if (err) {
+    
+    } else {
+        console.log('metadata: ' + metadata);
+    }
+});
