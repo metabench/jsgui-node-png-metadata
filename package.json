@@ -10,10 +10,15 @@
   "licenses": [
     {}
   ],
+  "bin": {
+    "jsgui-node-png-metadata": "./bin/jsgui-node-png-metadata"
+  },
   "main": "./jsgui-node-png-metadata.js",
   "dependencies": {
     "requirejs": "~2.1.2",
-    "jsgui-lang-essentials-geometry": "~0.3.8",
+    "jsgui-lang-essentials": "~0.3.8",
+    "commander": "~1.1.1",
+    "amdefine": ">=0.0.4"
   },
   "engines": {
     "node": ">=0.8.0"

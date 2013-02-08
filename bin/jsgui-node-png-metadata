@@ -19,24 +19,40 @@ var program = require('commander');
 console.log(program.image_path);
 //console.log(program.css_path);
 
-/*
 
-var sheet = new Spritesheet({
-    source_dir: program.source_dir || '.',
-    rel_sprite_path: program.rel_sprite_path || '.',
-    sprite_path: program.sprite_path || 'sprite.png',
-    css_path: program.css_path || 'sprite.css'
-});
+//console.log('Arguments length:', process.argv.length);
+//console.log(process.argv);
 
-sheet.spritesheet();
+// then get the image path.
+//  it will be an argument by itself.
 
-*/
+//process.argv
 
-
-png_metadata.from_file(image_path, function(err, res_metadata) {
-    if (err) {
+if (process.argv.length > 2) {
+    // get the ones that don't have a - to start with (or don't have a space?)
     
-    } else {
-        console.log('metadata: ' + metadata);
+    var cl_arhv = process.argv.slice(2);
+    
+    if (cl_arhv.length == 1) {
+        var image_path = cl_arhv[0];
+        
+        
+        png_metadata.from_file(image_path, function(err, res_metadata) {
+            if (err) {
+            
+            } else {
+                console.log('metadata: ' + stringify(res_metadata));
+            }
+        });
+
+        
     }
-});
+    
+    
+    
+}
+
+
+
+
+

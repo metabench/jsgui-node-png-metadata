@@ -1,3 +1,7 @@
+if (typeof define !== 'function') {
+    var define = require('amdefine')(module);
+}
+
 define(['jsgui-lang-essentials', 'fs'], 
     function(jsgui, fs) {
         
@@ -15,7 +19,7 @@ define(['jsgui-lang-essentials', 'fs'],
         
         // Read from file.
         // Read from stream.
-        // Read from buffer.
+        // Read from buffer.??
         
         
         var res = {
@@ -49,8 +53,8 @@ define(['jsgui-lang-essentials', 'fs'],
                     
                     
                     
-                    console.log('data_num ' + data_num);
-                    console.log('');
+                    //console.log('data_num ' + data_num);
+                    //console.log('');
                     //png_pos
                     
                     // move through the data... we'll keep in sync with the chunks.
@@ -106,11 +110,11 @@ define(['jsgui-lang-essentials', 'fs'],
                         var img_width = data.readUInt32BE(16);
                         var img_height = data.readUInt32BE(20);
                         
-                        bit_depth = chunk_buffer.readUInt8(24);
-                        color_type = chunk_buffer.readUInt8(25);
-                        var compression_method = chunk_buffer.readUInt8(26);
-                        var filter_method = chunk_buffer.readUInt8(27);
-                        var interlace_method = chunk_buffer.readUInt8(28);
+                        bit_depth = data.readUInt8(24);
+                        color_type = data.readUInt8(25);
+                        var compression_method = data.readUInt8(26);
+                        var filter_method = data.readUInt8(27);
+                        var interlace_method = data.readUInt8(28);
                         
                         var obj_metadata = {
                             'width': img_width,
@@ -120,8 +124,8 @@ define(['jsgui-lang-essentials', 'fs'],
                             'compression_method': compression_method
                         }
                         
-                        data.pause();
-                        data.destroy();
+                        stream.pause();
+                        stream.destroy();
                         
                         callback(null, obj_metadata);
                         
@@ -133,18 +137,18 @@ define(['jsgui-lang-essentials', 'fs'],
                 });
 
                 // the reading is finished...
-                src.on('close', function () {
+                stream.on('close', function () {
                     // It should have been processing the data recieved.
                     
                     //writeStream.end(); // ...close up the write, too!
-                    console.log("src finished.");
+                    //console.log("src finished.");
                 });
                 
 				
             },
             'from_file': function(source_path, callback) {
                 // could deal with multiple files.
-                
+                var that = this;
                 fs.stat(source_path, function(err, stats) {
 					if (err) {
 						
@@ -159,7 +163,7 @@ define(['jsgui-lang-essentials', 'fs'],
 						
 						// Being able to give or pipe it a buffer would be useful.
 						//   Also, would be useful to only read the first part of the PNG rather than the whole thing.
-						var that = this;
+						
 						
 						fs.open(source_path, 'r', function(err, fd) {
 							if (err) {
