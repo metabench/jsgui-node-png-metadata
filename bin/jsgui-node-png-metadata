@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-var png_metadata = require('jsgui-node-png-metadata');
+var png_metadata = require('../jsgui-node-png-metadata.js');
 var jsgui = require('jsgui-lang-essentials');
 
-var stringify = jsgui.stringify;
+var stringify = jsgui.stringify, tof = jsgui.tof;
 
 var program = require('commander');
 
@@ -15,8 +15,6 @@ var program = require('commander');
 
 
 //console.log(program.source_dir);
-//console.log(program.rel_sprite_path);
-console.log(program.image_path);
 //console.log(program.css_path);
 
 
@@ -33,8 +31,20 @@ if (process.argv.length > 2) {
     
     var cl_arhv = process.argv.slice(2);
     
-    if (cl_arhv.length == 1) {
-        var image_path = cl_arhv[0];
+    //console.log('tof(cl_arhv) ' + tof(cl_arhv));
+    
+    // then get the ones without a - to start with.
+    
+    var cl_args_no_dash = [];
+    
+    jsgui.each(cl_arhv, function(i, v) {
+        if (v.indexOf('-') != 0) cl_args_no_dash.push(v);
+    });
+    
+    //console.log('cl_args_no_dash.length ' + cl_args_no_dash.length);
+    
+    if (cl_args_no_dash.length == 1) {
+        var image_path = cl_args_no_dash[0];
         
         
         png_metadata.from_file(image_path, function(err, res_metadata) {
@@ -45,6 +55,16 @@ if (process.argv.length > 2) {
             }
         });
 
+        
+    } else {
+        var images_paths = cl_args_no_dash;
+        png_metadata.from_file(images_paths, function(err, res_metadata) {
+            if (err) {
+            
+            } else {
+                console.log('metadata: ' + stringify(res_metadata));
+            }
+        });
         
     }
     
