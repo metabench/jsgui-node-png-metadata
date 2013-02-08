@@ -2,8 +2,8 @@ if (typeof define !== 'function') {
     var define = require('amdefine')(module);
 }
 
-define(['jsgui-lang-essentials', 'fs'], 
-    function(jsgui, fs) {
+define(['jsgui-lang-essentials', 'fs', 'path'], 
+    function(jsgui, fs, path) {
         var tof = jsgui.tof, each = jsgui.each;
         // Just reads the metadata.
         /*
@@ -70,8 +70,8 @@ define(['jsgui-lang-essentials', 'fs'],
                         var img_width = chunk_buffer.readUInt32BE(8);
                         var img_height = chunk_buffer.readUInt32BE(12);
                         
-                        console.log('img_width ' + img_width);
-                        console.log('img_height ' + img_height);
+                        //console.log('img_width ' + img_width);
+                        //console.log('img_height ' + img_height);
                         
                         bit_depth = chunk_buffer.readUInt8(16);
                         color_type = chunk_buffer.readUInt8(17);
@@ -154,8 +154,8 @@ define(['jsgui-lang-essentials', 'fs'],
             'from_file': function(source_path, callback) {
                 // could process these files sequentially when there is an array of them.
                 var that = this;
-                console.log('source_path ' + source_path);
-                console.log('tof(source_path) ' + tof(source_path));
+                //console.log('source_path ' + source_path);
+                //console.log('tof(source_path) ' + tof(source_path));
                 
                 if (tof(source_path) == 'array') {
                     var fns = [];
@@ -187,7 +187,7 @@ define(['jsgui-lang-essentials', 'fs'],
                         } else {
                             var size = stats.size;
                             
-                            console.log('size ' + size);
+                            //console.log('size ' + size);
                             
                             // General PNG reading code.
                             //  Perhaps I will have an event driven PNG reader, so that it calls a function when it
@@ -202,13 +202,14 @@ define(['jsgui-lang-essentials', 'fs'],
                                     
                                 } else {
                                     var src = fs.createReadStream(source_path);
-                                    
+                                    var ext = path.extname(source_path);
                                 
                                     that.from_stream(src, function(err, res) {
                                         if (err) {
                                         
                                         } else {
                                             res.size = size;
+                                            res.extension = ext;
                                             callback(null, res);
                                         }
                                         

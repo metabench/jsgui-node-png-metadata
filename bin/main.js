@@ -31,7 +31,7 @@ if (process.argv.length > 2) {
     
     var cl_arhv = process.argv.slice(2);
     
-    console.log('tof(cl_arhv) ' + tof(cl_arhv));
+    //console.log('tof(cl_arhv) ' + tof(cl_arhv));
     
     // then get the ones without a - to start with.
     
@@ -41,7 +41,7 @@ if (process.argv.length > 2) {
         if (v.indexOf('-') != 0) cl_args_no_dash.push(v);
     });
     
-    console.log('cl_args_no_dash.length ' + cl_args_no_dash.length);
+    //console.log('cl_args_no_dash.length ' + cl_args_no_dash.length);
     
     if (cl_args_no_dash.length == 1) {
         var image_path = cl_args_no_dash[0];
