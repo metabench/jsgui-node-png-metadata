@@ -11,7 +11,7 @@
     {}
   ],
   "bin": {
-    "jsgui-node-png-metadata": "./bin/jsgui-node-png-metadata"
+    "jsgui-node-png-metadata": "./bin/main.js"
   },
   "main": "./jsgui-node-png-metadata.js",
   "dependencies": {
